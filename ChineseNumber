@@ -1,0 +1,111 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class ChineseNumber2 {
+
+	public static void main(String[] args) {
+		System.out.println("請輸入五位數金額");
+		Scanner scan = new Scanner(System.in);
+		String user = scan.next();
+		StringBuilder sb3 = new StringBuilder(user);
+		if (sb3.length() != 5) {
+			int count = 5-sb3.length();
+//			System.out.println(sb3.length());
+			for (int i = 0; i < count; i++) {
+				if (sb3.charAt(i) != 0) {
+					sb3.insert(i,"0");
+//					System.out.println(sb3.charAt(i));
+				}
+//				System.out.println(sb3.length());
+			}
+			
+		}
+		System.out.println(sb3);
+		String str = "";
+		StringBuilder sb1 = new StringBuilder(sb3);
+		ArrayList<String> cNumber = new ArrayList<String>();
+		
+		for (int i = 0; i < sb1.length(); i++) {
+//			System.out.println(sb1.charAt(i));
+			switch (sb1.charAt(i)) {
+			case '1':
+				cNumber.add("壹");
+				break;
+			case '2':
+				cNumber.add("貳");
+				break;
+			case '3':
+				cNumber.add("參");
+				break;
+			case '4':
+				cNumber.add("肆");
+				break;
+			case '5':
+				cNumber.add("伍");
+				break;
+			case '6':
+				cNumber.add("陸");
+				break;
+			case '7':
+				cNumber.add("柒");
+				break;
+			case '8':
+				cNumber.add("捌");
+				break;
+			case '9':
+				cNumber.add("玖");
+				break;
+			default:
+				cNumber.add("零");
+				break;
+			}
+		}
+		for (int i = 0; i < cNumber.size(); i++) {
+			str += cNumber.get(i);
+		}
+		
+		StringBuilder sb2 = new StringBuilder(str);
+//		System.out.println(sb2);
+		
+//		System.out.println(sb2.charAt(0));
+		for (int i = 0; i < sb2.length(); i++) {
+			if (sb2.charAt(i)=='零') {
+				if (sb2.charAt(i)==sb2.charAt(i+1)) {
+					sb2.replace(i, i+2, " ");
+//					System.out.println(sb2+"RK");
+					sb2.insert(i, " ");
+//					System.out.println(sb2+"Test");
+				} 
+			}
+		}
+		
+		sb2.insert(1, "萬");
+		sb2.insert(3, "仟");
+		sb2.insert(5, "佰");
+		sb2.insert(7, "拾");
+//		System.out.println(sb2+"RK11");
+		for (int i = 0; i < sb2.length(); i++) {
+			if (sb2.charAt(i)==' ') {
+				if (sb2.charAt(i)==sb2.charAt(i+2)) {
+					sb2.replace(i, i+4, "零");
+//					System.out.println("Change");
+				} 
+			}  else if(sb2.charAt(i)=='零'){
+				sb2.replace(i, i+2, "零");
+				}
+		}
+//		System.out.println(sb2+"RK");
+		for (int i = 0; i < sb2.length(); i++) {
+			if (sb2.charAt(0)=='零') {
+				sb2.deleteCharAt(0);
+//				System.out.println(sb2);
+				continue;
+			}
+			if (sb2.charAt(i)=='零') {
+				if (sb2.charAt(i)==sb2.charAt(i+1)) {
+					sb2.replace(i, i+2, "零");
+//					System.out.println(sb2+"KR");
+				}
+			}
+		}
+		System.out.println(sb2);
